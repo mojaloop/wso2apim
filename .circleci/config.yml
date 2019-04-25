@@ -80,8 +80,6 @@ workflows:
     jobs:
       - build:
           context: org-global
-          requires:
-            - setup
           filters:
             tags:
               only: /^v.*/
@@ -90,4 +88,3 @@ workflows:
                 - /.*/
                 - /feature*/
                 - /bugfix*/
-
