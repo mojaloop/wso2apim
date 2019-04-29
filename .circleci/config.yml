@@ -49,11 +49,13 @@ jobs:
     <<: *defaults_working_directory
     <<: *defaults_docker_node
     <<: *defaults_environment
-    <<: *defaults_awsCliDependencies
 
     steps:
       - checkout
       - setup_remote_docker
+      - run:
+          name: Setup AWS dependencies
+          command: *defaults_awsCliDependencies
       - run:
           name: Setup Docker Build
           command: |
