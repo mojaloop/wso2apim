@@ -9,7 +9,7 @@ defaults_working_directory: &defaults_working_directory
 
 defaults_docker_node: &defaults_docker_node
   docker:
-    - image: circleci/openjdk:8-jdk
+    - image: mhart/alpine-node:8.9.4
 
 defaults_Environment: &defaults_environment
   environment:
