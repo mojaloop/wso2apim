@@ -53,7 +53,7 @@ jobs:
       - run:
           name: Setup Docker Build
           command: |
-            aws s3 cp $ML_S3_URL/JWSGenerator-1.0.jar ./files/dropins/JWSGenerator-1.0.jar
+            aws s3 cp $ML_S3_URL/JWSGenerator-1.0.jar ./files/dropins/JWSGenerator-1.1.0.jar
             aws s3 cp $ML_S3_URL/DFSPSourceValidator-1.0.jar ./files/dropins/DFSPSourceValidator-1.0.jar
             aws s3 cp $ML_S3_URL/mysql-connector-java-5.1.46.jar ./files/lib/mysql-connector-java-5.1.46.jar
             aws s3 cp $ML_S3_URL/dnsjava-2.1.8.jar ./files/lib/dnsjava-2.1.8.jar
