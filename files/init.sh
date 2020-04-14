@@ -10,7 +10,11 @@ trap cleanup 9 15
 cleanup()
 {
   echo "Caught Signal ... cleaning up."
-  kill -15 ${WSO2_SERVER_HOME}/wso2carbon.pid
+  if [ -e ${WSO2_SERVER_HOME}/wso2carbon.pid ]
+  then
+    echo "killing wso2carbon.pid"
+    kill -15 ${WSO2_SERVER_HOME}/wso2carbon.pid
+  fi
   echo "Done cleanup ... quitting."
   exit 0
 }
