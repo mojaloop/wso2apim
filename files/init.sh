@@ -5,6 +5,16 @@ set -e
 export CONF_MOUNT_PATH=${WORKING_DIRECTORY}/wso2-config-volume
 export SECRET_MOUNT_PATH=${WORKING_DIRECTORY}/wso2-secret-volume
 
+trap cleanup 9 15
+
+cleanup()
+{
+  echo "Caught Signal ... cleaning up."
+  kill -15 ${WSO2_SERVER_HOME}/wso2carbon.pid
+  echo "Done cleanup ... quitting."
+  exit 0
+}
+
 deployment_volume=${WSO2_SERVER_HOME}/repository/deployment/server
 # original deployment artifacts
 original_deployment_artifacts=${WORKING_DIRECTORY}/wso2-tmp/server
