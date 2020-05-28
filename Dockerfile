@@ -58,7 +58,6 @@ EXPOSE 9443 8243
 
 ENTRYPOINT ${WORKING_DIRECTORY}/init.sh
 
-
 # MOUNTS -: new persisted mounts required
 # 1) /home/wso2carbon/wso2am-2.6.0/repository/deployment/server/synapse-configs/default/api
 # 2) /home/wso2carbon/wso2am-2.6.0/repository/deployment/server/synapse-configs/default/endpoints
