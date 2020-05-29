@@ -33,12 +33,12 @@ RUN apk add --update curl netcat-openbsd tzdata libxml2-utils openssl && \
 
 # copy the wso2 product distributions to user's home directory
 COPY --chown=wso2carbon:wso2 ${FILES}/${WSO2_SERVER_DIST} ${WSO2_SERVER_HOME}
-COPY --chown=wso2carbon:wso2 ${FILES}/${WSO2_SERVER_DIST}/repository/deployment/server ${USER_HOME}/wso2-tmp/server
-COPY --chown=wso2carbon:wso2 ${FILES}/wars/*.war ${USER_HOME}/wso2-tmp/server/webapps/
+
 # copy mysql connector jar to the server as a third party library
 COPY --chown=wso2carbon:wso2 ${FILES}/lib/* ${WSO2_SERVER_HOME}/repository/components/lib/
 COPY --chown=wso2carbon:wso2 ${FILES}/dropins/* ${WSO2_SERVER_HOME}/repository/components/dropins/
 COPY --chown=wso2carbon:wso2 ${FILES}/wars/*.war ${WSO2_SERVER_HOME}/repository/deployment/server/webapps/
+
 # copy init script to user home
 COPY --chown=wso2carbon:wso2 ${FILES}/init.sh ${USER_HOME}/
 
@@ -57,3 +57,7 @@ ENV JAVA_HOME=${JAVA_HOME} \
 EXPOSE 9443 8243
 
 ENTRYPOINT ${WORKING_DIRECTORY}/init.sh
+
+# MOUNTS -: new persisted mounts required
+# 1) /home/wso2carbon/wso2am-2.6.0/repository/deployment/server/synapse-configs/default/api
+# 2) /home/wso2carbon/wso2am-2.6.0/repository/deployment/server/synapse-configs/default/endpoints
