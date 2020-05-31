@@ -27,12 +27,13 @@ RUN apk add --update curl netcat-openbsd tzdata libxml2-utils openssl && \
     java -jar ${JAVA_HOME}/tzupdater.jar -v -f -l https://data.iana.org/time-zones/releases/tzdata2018e.tar.gz && \
     addgroup -S -g ${USER_GROUP_ID} ${USER_GROUP} && \
     adduser -S -h ${USER_HOME} -G ${USER_GROUP} -u ${USER_ID} ${USER} && \
-    mkdir -p /etc/.java/.systemPrefs ${USER_HOME}/wso2-tmp/server/ && chown -R wso2carbon:wso2 ${USER_HOME} /etc/.java/.systemPrefs ${JAVA_HOME} && \
+    mkdir -p /etc/.java/.systemPrefs ${USER_HOME}/wso2-tmp/synapse-configs/ && chown -R wso2carbon:wso2 ${USER_HOME} /etc/.java/.systemPrefs ${JAVA_HOME} && \
     rm -rf /var/cache/apk/* && \
     rm -rf /tmp/* 
 
 # copy the wso2 product distributions to user's home directory
 COPY --chown=wso2carbon:wso2 ${FILES}/${WSO2_SERVER_DIST} ${WSO2_SERVER_HOME}
+COPY --chown=wso2carbon:wso2 ${FILES}/${WSO2_SERVER_DIST}/repository/deployment/server/synapse-configs/ ${USER_HOME}/wso2-tmp/synapse-configs/
 
 # copy mysql connector jar to the server as a third party library
 COPY --chown=wso2carbon:wso2 ${FILES}/lib/* ${WSO2_SERVER_HOME}/repository/components/lib/
@@ -58,6 +59,5 @@ EXPOSE 9443 8243
 
 ENTRYPOINT ${WORKING_DIRECTORY}/init.sh
 
-# MOUNTS -: new persisted mounts required
-# 1) /home/wso2carbon/wso2am-2.6.0/repository/deployment/server/synapse-configs/default/api
-# 2) /home/wso2carbon/wso2am-2.6.0/repository/deployment/server/synapse-configs/default/endpoints
+# MOUNT TO
+# /home/wso2carbon/wso2am-2.6.0/repository/deployment/server/synapse-configs/
